@@ -1,5 +1,20 @@
-[gd_scene format=3 uid="uid://dvsd0rwp4ui48"]
+[gd_scene load_steps=3 format=3 uid="uid://dvsd0rwp4ui48"]
+
+[ext_resource type="Texture2D" uid="uid://dm3xp3ebef7t3" path="res://icon.svg" id="1_e0s11"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qinvr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_e0s11")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="EnemyScene" type="Node2D"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.148438, 0.148438)
+sprite_frames = SubResource("SpriteFrames_qinvr")

@@ -1,3 +1,31 @@
-[gd_scene format=3 uid="uid://kufxctbsy064"]
+[gd_scene load_steps=6 format=3 uid="uid://kufxctbsy064"]
+
+[ext_resource type="Texture2D" uid="uid://plxcfq8h27cw" path="res://Sprites/Placeholders/1.png" id="1_6fuoh"]
+[ext_resource type="Script" path="res://Scripts/Map_movement.gd" id="1_j3qis"]
+[ext_resource type="Texture2D" uid="uid://bel1oaei2gsim" path="res://Sprites/Placeholders/2.png" id="2_hujd8"]
+[ext_resource type="Texture2D" uid="uid://bheqtsujgpc7l" path="res://Sprites/Placeholders/3.png" id="3_14m6e"]
+[ext_resource type="Texture2D" uid="uid://c0jn28v5p1rc8" path="res://Sprites/Placeholders/4.png" id="4_xd7l8"]
 
 [node name="LevelScene" type="Node2D"]
+script = ExtResource("1_j3qis")
+
+[node name="LevelParralax" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="LevelParralax"]
+motion_mirroring = Vector2(256, 0)
+
+[node name="1" type="Sprite2D" parent="LevelParralax/ParallaxLayer"]
+position = Vector2(32, 32)
+texture = ExtResource("1_6fuoh")
+
+[node name="2" type="Sprite2D" parent="LevelParralax/ParallaxLayer"]
+position = Vector2(96, 32)
+texture = ExtResource("2_hujd8")
+
+[node name="3" type="Sprite2D" parent="LevelParralax/ParallaxLayer"]
+position = Vector2(160, 32)
+texture = ExtResource("3_14m6e")
+
+[node name="4" type="Sprite2D" parent="LevelParralax/ParallaxLayer"]
+position = Vector2(224, 32)
+texture = ExtResource("4_xd7l8")

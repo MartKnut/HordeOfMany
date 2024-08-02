@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://dxyjy87vildw7"]
+
+[ext_resource type="Script" path="res://Scripts/Player_Script.gd" id="1_8at8w"]
+[ext_resource type="Texture2D" uid="uid://c17ic8fsejmsw" path="res://Sprites/Placeholders/gun.png" id="1_kc1xf"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_45nnu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_kc1xf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fpyn2"]
+
+[node name="PlayerScene" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_8at8w")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_45nnu")
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(33, 54)
+shape = SubResource("RectangleShape2D_fpyn2")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(32, 32)
