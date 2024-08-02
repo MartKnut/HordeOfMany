@@ -19,10 +19,10 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 	
-	if position.x >= 256:
-		position.x = 0
-	elif position.x <= -64:
-		position.x = 192
+	if self.position.x >= 256:
+		self.position.x = 0
+	elif self.position.x <= -64:
+		self.position.x = 192
 	
 	var shoot = Input.is_action_just_pressed("Shoot")
 	if shoot:

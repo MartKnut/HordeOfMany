@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://dvsd0rwp4ui48"]
+[gd_scene load_steps=4 format=3 uid="uid://dvsd0rwp4ui48"]
 
 [ext_resource type="Texture2D" uid="uid://dm3xp3ebef7t3" path="res://icon.svg" id="1_e0s11"]
 
@@ -13,8 +13,13 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="EnemyScene" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dahdt"]
+
+[node name="EnemyScene" type="Area2D"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.148438, 0.148438)
 sprite_frames = SubResource("SpriteFrames_qinvr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_dahdt")
