@@ -1,3 +1,5 @@
 [gd_scene format=3 uid="uid://dvsd0rwp4ui48"]
 
 [node name="EnemyScene" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
