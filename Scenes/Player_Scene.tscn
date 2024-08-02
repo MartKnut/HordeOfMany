@@ -31,3 +31,10 @@ shape = SubResource("RectangleShape2D_fpyn2")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(32, 32)
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(32, 64)
+target_position = Vector2(0, -64)
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
