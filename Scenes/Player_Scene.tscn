@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dxyjy87vildw7"]
+[gd_scene load_steps=6 format=3 uid="uid://dxyjy87vildw7"]
 
 [ext_resource type="Script" path="res://Scripts/Player_Script.gd" id="1_8at8w"]
 [ext_resource type="Texture2D" uid="uid://c17ic8fsejmsw" path="res://Sprites/Placeholders/gun.png" id="1_kc1xf"]
+[ext_resource type="Texture2D" uid="uid://b54h5prl5upvc" path="res://Sprites/Overlays/screenfilter.png" id="3_gvit8"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_45nnu"]
 animations = [{
@@ -38,3 +39,7 @@ target_position = Vector2(0, -64)
 hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
+
+[node name="Screenfilter" type="Sprite2D" parent="."]
+texture = ExtResource("3_gvit8")
+centered = false

@@ -1,13 +1,13 @@
 [gd_scene load_steps=5 format=3 uid="uid://dvsd0rwp4ui48"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy_Script.gd" id="1_bwbtf"]
-[ext_resource type="Texture2D" uid="uid://dm3xp3ebef7t3" path="res://icon.svg" id="1_e0s11"]
+[ext_resource type="Texture2D" uid="uid://3ofs3g8f0wfs" path="res://Sprites/Enemies/walker.png" id="2_ln63s"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qinvr"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_e0s11")
+"texture": ExtResource("2_ln63s")
 }],
 "loop": true,
 "name": &"default",
@@ -15,16 +15,16 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dahdt"]
-size = Vector2(19, 19)
+size = Vector2(14, 15)
 
 [node name="EnemyScene" type="Area2D"]
 script = ExtResource("1_bwbtf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.148438, 0.148438)
+scale = Vector2(0.826087, 0.826087)
 sprite_frames = SubResource("SpriteFrames_qinvr")
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(9.5, 9.5)
+position = Vector2(10, 9)
 shape = SubResource("RectangleShape2D_dahdt")

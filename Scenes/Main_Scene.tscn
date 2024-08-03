@@ -10,16 +10,17 @@
 [node name="UiScene" parent="." instance=ExtResource("2_71rve")]
 
 [node name="Enemy1" parent="." instance=ExtResource("4_jtivd")]
-position = Vector2(7, 9)
+position = Vector2(7, -2)
 
 [node name="Enemy2" parent="." instance=ExtResource("4_jtivd")]
-position = Vector2(80, 26)
+position = Vector2(96, 0)
+scale = Vector2(-1, 1)
 
 [node name="Enemy3" parent="." instance=ExtResource("4_jtivd")]
-position = Vector2(156, 17)
+position = Vector2(156, -1)
 
 [node name="Enemy4" parent="." instance=ExtResource("4_jtivd")]
-position = Vector2(230, 10)
+position = Vector2(222, 1)
 
 [node name="PlayerScene" parent="." instance=ExtResource("3_ml1gh")]
 
