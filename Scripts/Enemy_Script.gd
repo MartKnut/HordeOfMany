@@ -50,6 +50,7 @@ func _process(delta):
 
 func die():
 	canAttack = false
+	$CollisionShape2D.disabled = true
 	$AudioStreamPlayer2D.play()
 	$DeathTimer.start()
 
