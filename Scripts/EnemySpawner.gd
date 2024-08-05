@@ -1,13 +1,20 @@
 extends Node
 
-
+# Public Variables
 @export var zomb : PackedScene
-@export var mobs : Array[Node]
+@export var startWaitTime : float = 6
+@export var expoDiffScaling : float = 2
+@export var minDelay : float = 1.8
 
+# Private Variables
+var spawnDelay : float
+var spawnedEnemies : int
 var gameTime : float
+var mobs : Array[Node]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	spawnDelay = startWaitTime
 	mobs = get_children()
 	print(mobs)
 
@@ -49,3 +56,15 @@ func _on_spawn_timer_timeout():
 	add_child(_mob)
 	mobs = get_children()
 	print(mobs)
+	
+	spawnedEnemies += 1
+	if spawnDelay > minDelay:
+		spawnDelay = startWaitTime - 0.1 * (expoDiffScaling**(spawnedEnemies / spawnDelay))
+	else :
+		spawnDelay = minDelay
+	print(spawnDelay)
+	
+	if spawnDelay > minDelay:
+		$SpawnTimer.wait_time = spawnDelay
+	else:
+		$SpawnTimer.wait_time = minDelay
