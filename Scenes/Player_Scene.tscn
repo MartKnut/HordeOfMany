@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dxyjy87vildw7"]
+[gd_scene load_steps=14 format=3 uid="uid://dxyjy87vildw7"]
 
 [ext_resource type="Script" path="res://Scripts/Player_Script.gd" id="1_8at8w"]
 [ext_resource type="Texture2D" uid="uid://dg3l6xayesy8g" path="res://Sprites/Player/muzflash.png" id="2_slikx"]
@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://dxnbprh6qp42d" path="res://Sounds/ZombSpawn2.wav" id="6_86ojm"]
 [ext_resource type="AudioStream" uid="uid://cj6ulxve5sfeg" path="res://Sounds/ZombSpawn3.wav" id="7_clnye"]
 [ext_resource type="AudioStream" uid="uid://c7obt428t5r4e" path="res://Sounds/ZombSpawn4.wav" id="8_l6c53"]
+[ext_resource type="AudioStream" uid="uid://cu0ryhy51ex8j" path="res://Sounds/Shot.wav" id="9_8dexq"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_62582"]
 animations = [{
@@ -113,5 +114,9 @@ stream = SubResource("AudioStreamRandomizer_iypmi")
 [node name="SpawnSound2" type="AudioStreamPlayer2D" parent="Sound"]
 position = Vector2(-128, 0)
 stream = SubResource("AudioStreamRandomizer_iypmi")
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="Sound"]
+stream = ExtResource("9_8dexq")
+volume_db = -2.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

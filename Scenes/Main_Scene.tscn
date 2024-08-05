@@ -15,3 +15,4 @@ position = Vector2(32, 0)
 [node name="LevelScene" parent="." instance=ExtResource("4_tb66b")]
 
 [node name="EnemySpawner" parent="." instance=ExtResource("1_pdo1r")]
+position = Vector2(0, 24)

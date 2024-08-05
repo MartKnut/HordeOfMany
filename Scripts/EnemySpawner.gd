@@ -11,12 +11,12 @@ var spawnDelay : float
 var spawnedEnemies : int
 var gameTime : float
 var mobs : Array[Node]
-
+var wave : int
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	spawnDelay = startWaitTime
 	mobs = get_children()
-	print(mobs)
+	#print(mobs)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -37,8 +37,8 @@ func _on_spawn_timer_timeout():
 	_mob.initialize(mob_spawn_location.position, player.position)
 	var distanceFromPlayer = player.position - mob_spawn_location.position
 	
-	print("player is at: " , player.position.x , ", and the mob is at: " , 
-		  mob_spawn_location.position.x , ", the distance from the player is :" , distanceFromPlayer)
+	#print("player is at: " , player.position.x , ", and the mob is at: " , 
+		  #mob_spawn_location.position.x , ", the distance from the player is :" , distanceFromPlayer)
 	
 	
 	if distanceFromPlayer.x >= 127:
@@ -50,21 +50,35 @@ func _on_spawn_timer_timeout():
 	elif distanceFromPlayer.x <= 0:
 		player.playaudio(false)
 	
-	
-
 	# Spawn the mob by adding it to the Main scene.
 	add_child(_mob)
 	mobs = get_children()
-	print(mobs)
+	#print(mobs)
 	
 	spawnedEnemies += 1
-	if spawnDelay > minDelay:
-		spawnDelay = startWaitTime - 0.1 * (expoDiffScaling**(spawnedEnemies / spawnDelay))
-	else :
-		spawnDelay = minDelay
-	print(spawnDelay)
 	
-	if spawnDelay > minDelay:
-		$SpawnTimer.wait_time = spawnDelay
+	if minDelay <= 0:
+		minDelay = 1
+	elif spawnDelay >= minDelay:
+		spawnDelay = startWaitTime - 0.1 * (expoDiffScaling**(spawnedEnemies / spawnDelay))
+		print("Time reduced by: " , 0.1 * (expoDiffScaling**(spawnedEnemies / spawnDelay)))
 	else:
 		$SpawnTimer.wait_time = minDelay
+		spawnDelay = startWaitTime
+		expoDiffScaling += 0.05
+		minDelay -= 0.1
+		spawnedEnemies = 0
+		wave = wave + 1
+		
+		print("New Spawn Delay: ", spawnDelay, " New Difficulty Multiplier: ", expoDiffScaling, " New Min Delay: ", minDelay, " Wave: ", wave)
+		
+	
+	
+	if spawnDelay <= minDelay:
+		$SpawnTimer.wait_time = minDelay
+	elif spawnDelay >= minDelay:
+		$SpawnTimer.wait_time = spawnDelay
+	
+	
+	print("Spawn Delay: " , spawnDelay)
+	

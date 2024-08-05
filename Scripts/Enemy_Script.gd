@@ -32,7 +32,7 @@ func _enter_tree():
 		right = true
 	else:
 		teleportable = false
-	print(globalPosition)
+	#print(globalPosition)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

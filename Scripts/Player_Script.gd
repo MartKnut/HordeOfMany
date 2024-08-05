@@ -35,9 +35,10 @@ func _physics_process(delta):
 
 
 func _shoot():
+	$Sound/ShootSound.play()
 	# Check if the raycast hits an item
 	if $RayCast2D.is_colliding():
-			print($RayCast2D.get_collider().name)
+			#print($RayCast2D.get_collider().name)
 			var hit = $RayCast2D.get_collider()
 			if hit.is_in_group("enemy"): 
 				hit.die()
