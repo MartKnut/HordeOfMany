@@ -1,6 +1,6 @@
 extends Area2D
 
-var teleportable : bool = true
+var teleportable : bool = false
 var right : bool
 var player : Node
 var globalPosition
@@ -12,20 +12,22 @@ func _ready():
 	
 	player = $"../../PlayerScene"
 	globalPosition = global_position.x
-	if position.x <= 64:
+	if globalPosition <= 32:
 		teleportable = true
 		right = false
-	if position.x >= 192:
+	elif globalPosition >= 128:
 		teleportable = true
 		right = true
+	else:
+		teleportable = false
 	print(globalPosition)
 
 func _enter_tree():
 	globalPosition = global_position.x
-	if position.x <= 64:
+	if globalPosition <= 64:
 		teleportable = true
 		right = false
-	elif position.x >= 192:
+	elif globalPosition >= 128:
 		teleportable = true
 		right = true
 
@@ -35,12 +37,12 @@ func _process(delta):
 		if not right:
 			if player.position.x >= 192:
 				position.x = globalPosition+256
-			elif player.position.x >= 0:
+			elif player.position.x >= -0:
 				position.x = globalPosition
 		else:
-			if player.position.x != 0:
+			if player.position.x <= 0:
 				position.x = globalPosition-256
-			elif player.position.x <= -192:
+			elif player.position.x <= 192:
 				position.x = globalPosition
 
 func die():
