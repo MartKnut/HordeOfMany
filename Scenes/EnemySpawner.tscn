@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://7do70cge7d3l"]
+
+[ext_resource type="Script" path="res://Scripts/EnemySpawner.gd" id="1_iowmb"]
+[ext_resource type="PackedScene" uid="uid://dvsd0rwp4ui48" path="res://Scenes/Enemy_Scene.tscn" id="2_e6xxq"]
+
+[sub_resource type="Curve2D" id="Curve2D_wh5ai"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 256, 0)
+}
+point_count = 2
+
+[node name="EnemySpawner" type="Node2D"]
+script = ExtResource("1_iowmb")
+zomb = ExtResource("2_e6xxq")
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 320.0
+autostart = true
+
+[node name="SpawnPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_wh5ai")
+
+[node name="SpawnLocation" type="PathFollow2D" parent="SpawnPath"]
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

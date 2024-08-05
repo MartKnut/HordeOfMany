@@ -1,10 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://kufxctbsy064"]
+[gd_scene load_steps=2 format=3 uid="uid://kufxctbsy064"]
 
-[ext_resource type="Script" path="res://Scripts/Map_movement.gd" id="1_j3qis"]
 [ext_resource type="Texture2D" uid="uid://mbtq1ea1npw8" path="res://Sprites/Background/256x64.png" id="2_ry0lf"]
 
 [node name="LevelScene" type="Node2D"]
-script = ExtResource("1_j3qis")
+z_index = -99
 
 [node name="LevelParralax" type="ParallaxBackground" parent="."]
 

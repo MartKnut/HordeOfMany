@@ -1,45 +1,116 @@
-[gd_scene load_steps=6 format=3 uid="uid://dxyjy87vildw7"]
+[gd_scene load_steps=13 format=3 uid="uid://dxyjy87vildw7"]
 
 [ext_resource type="Script" path="res://Scripts/Player_Script.gd" id="1_8at8w"]
-[ext_resource type="Texture2D" uid="uid://c17ic8fsejmsw" path="res://Sprites/Placeholders/gun.png" id="1_kc1xf"]
+[ext_resource type="Texture2D" uid="uid://dg3l6xayesy8g" path="res://Sprites/Player/muzflash.png" id="2_slikx"]
+[ext_resource type="Texture2D" uid="uid://dretf5w7vuvq2" path="res://Sprites/Player/gun.png" id="3_fxpsw"]
 [ext_resource type="Texture2D" uid="uid://b54h5prl5upvc" path="res://Sprites/Overlays/screenfilter.png" id="3_gvit8"]
+[ext_resource type="AudioStream" uid="uid://dgtlfivpi0aye" path="res://Sounds/ZombSpawn1.wav" id="5_x11fm"]
+[ext_resource type="AudioStream" uid="uid://dxnbprh6qp42d" path="res://Sounds/ZombSpawn2.wav" id="6_86ojm"]
+[ext_resource type="AudioStream" uid="uid://cj6ulxve5sfeg" path="res://Sounds/ZombSpawn3.wav" id="7_clnye"]
+[ext_resource type="AudioStream" uid="uid://c7obt428t5r4e" path="res://Sounds/ZombSpawn4.wav" id="8_l6c53"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_45nnu"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_62582"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_kc1xf")
+"texture": ExtResource("2_slikx")
 }],
 "loop": true,
 "name": &"default",
 "speed": 5.0
 }]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_45nnu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_fxpsw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_fxpsw")
+}, {
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_fxpsw")
+}],
+"loop": true,
+"name": &"shoot",
+"speed": 5.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fpyn2"]
 size = Vector2(19, 22)
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_iypmi"]
+streams_count = 4
+stream_0/stream = ExtResource("5_x11fm")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("6_86ojm")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("7_clnye")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("8_l6c53")
+stream_3/weight = 1.0
+
 [node name="PlayerScene" type="CharacterBody2D"]
+z_index = 2
 motion_mode = 1
 script = ExtResource("1_8at8w")
 
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(-10, 26)
+sprite_frames = SubResource("SpriteFrames_62582")
+autoplay = "default"
+centered = false
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-32, 0)
 sprite_frames = SubResource("SpriteFrames_45nnu")
+animation = &"shoot"
+autoplay = "default"
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(32, 53)
+position = Vector2(0, 53)
 shape = SubResource("RectangleShape2D_fpyn2")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(32, 32)
+position = Vector2(0, 32)
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2(32, 64)
+position = Vector2(0, 64)
 target_position = Vector2(0, -64)
 hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
 
 [node name="Screenfilter" type="Sprite2D" parent="."]
+position = Vector2(-32, 0)
 texture = ExtResource("3_gvit8")
 centered = false
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.254
+
+[node name="Sound" type="Node2D" parent="."]
+
+[node name="AudioListener2D" type="AudioListener2D" parent="Sound"]
+current = true
+
+[node name="SpawnSound1" type="AudioStreamPlayer2D" parent="Sound"]
+position = Vector2(128, 0)
+stream = SubResource("AudioStreamRandomizer_iypmi")
+
+[node name="SpawnSound2" type="AudioStreamPlayer2D" parent="Sound"]
+position = Vector2(-128, 0)
+stream = SubResource("AudioStreamRandomizer_iypmi")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
