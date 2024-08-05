@@ -22,7 +22,7 @@ animations = [{
 size = Vector2(14, 15)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_gi2w5"]
-playback_mode = 1
+random_pitch = 1.15
 streams_count = 4
 stream_0/stream = ExtResource("3_y6rvv")
 stream_0/weight = 1.0

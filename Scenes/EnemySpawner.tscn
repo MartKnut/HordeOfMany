@@ -14,7 +14,7 @@ script = ExtResource("1_iowmb")
 zomb = ExtResource("2_e6xxq")
 
 [node name="SpawnTimer" type="Timer" parent="."]
-wait_time = 6.0
+wait_time = 0.5
 autostart = true
 
 [node name="SpawnPath" type="Path2D" parent="."]

@@ -49,6 +49,7 @@ animations = [{
 size = Vector2(19, 22)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_iypmi"]
+random_pitch = 1.15
 streams_count = 4
 stream_0/stream = ExtResource("5_x11fm")
 stream_0/weight = 1.0

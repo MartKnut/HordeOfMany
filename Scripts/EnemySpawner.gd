@@ -33,14 +33,15 @@ func _on_spawn_timer_timeout():
 	print("player is at: " , player.position.x , ", and the mob is at: " , 
 		  mob_spawn_location.position.x , ", the distance from the player is :" , distanceFromPlayer)
 	
+	
 	if distanceFromPlayer.x >= 127:
 		player.playaudio(false)
 	elif distanceFromPlayer.x >= 0:
 		player.playaudio(true)
+	elif distanceFromPlayer.x <= -128:
+		player.playaudio(true)
 	elif distanceFromPlayer.x <= 0:
 		player.playaudio(false)
-	elif distanceFromPlayer.x <= -127:
-		player.playaudio(true)
 	
 	
 

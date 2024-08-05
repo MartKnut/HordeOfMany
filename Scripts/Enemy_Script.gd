@@ -9,8 +9,20 @@ var canAttack = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
 	player = $"../../PlayerScene"
+	
+	#globalPosition = global_position.x
+	#if globalPosition <= 32:
+		#teleportable = true
+		#right = false
+	#elif globalPosition >= 128:
+		#teleportable = true
+		#right = true
+	#else:
+		#teleportable = false
+	#print(globalPosition)
+
+func _enter_tree():
 	globalPosition = global_position.x
 	if globalPosition <= 32:
 		teleportable = true
@@ -22,27 +34,18 @@ func _ready():
 		teleportable = false
 	print(globalPosition)
 
-func _enter_tree():
-	globalPosition = global_position.x
-	if globalPosition <= 64:
-		teleportable = true
-		right = false
-	elif globalPosition >= 128:
-		teleportable = true
-		right = true
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if teleportable:
 		if not right:
-			if player.position.x >= 192:
+			if player.global_position.x >= 192:
 				position.x = globalPosition+256
-			elif player.position.x >= -0:
+			elif player.global_position.x >= 0:
 				position.x = globalPosition
 		else:
-			if player.position.x <= 0:
+			if player.global_position.x <= 64:
 				position.x = globalPosition-256
-			elif player.position.x <= 192:
+			elif player.global_position.x >= 0:
 				position.x = globalPosition
 
 func die():
