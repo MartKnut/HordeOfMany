@@ -13,8 +13,8 @@ point_count = 2
 script = ExtResource("1_iowmb")
 zomb = ExtResource("2_e6xxq")
 startWaitTime = 3.5
-expoDiffScaling = 1.05
-minDelay = 3.38
+minDelay = 3.35
+reducedMaxDelay = 0.5
 
 [node name="SpawnTimer" type="Timer" parent="."]
 wait_time = 6.0

@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://cvat8no6vlkq1"]
+[gd_scene load_steps=6 format=3 uid="uid://cvat8no6vlkq1"]
 
+[ext_resource type="PackedScene" uid="uid://llmxt4oqses0" path="res://Scenes/GameManager.tscn" id="1_kpyco"]
 [ext_resource type="PackedScene" uid="uid://7do70cge7d3l" path="res://Scenes/EnemySpawner.tscn" id="1_pdo1r"]
 [ext_resource type="PackedScene" uid="uid://pjl15e22n3tq" path="res://Scenes/UI_Scene.tscn" id="2_71rve"]
 [ext_resource type="PackedScene" uid="uid://dxyjy87vildw7" path="res://Scenes/Player_Scene.tscn" id="3_ml1gh"]
@@ -7,10 +8,13 @@
 
 [node name="Node2D" type="Node2D"]
 
-[node name="UiScene" parent="." instance=ExtResource("2_71rve")]
+[node name="GameManager" parent="." instance=ExtResource("1_kpyco")]
 
 [node name="PlayerScene" parent="." instance=ExtResource("3_ml1gh")]
 position = Vector2(32, 0)
+
+[node name="UiScene" parent="PlayerScene" instance=ExtResource("2_71rve")]
+position = Vector2(-32, 0)
 
 [node name="LevelScene" parent="." instance=ExtResource("4_tb66b")]
 

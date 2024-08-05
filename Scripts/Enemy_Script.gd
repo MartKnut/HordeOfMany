@@ -11,16 +11,6 @@ var canAttack = true
 func _ready():
 	player = $"../../PlayerScene"
 	
-	#globalPosition = global_position.x
-	#if globalPosition <= 32:
-		#teleportable = true
-		#right = false
-	#elif globalPosition >= 128:
-		#teleportable = true
-		#right = true
-	#else:
-		#teleportable = false
-	#print(globalPosition)
 
 func _enter_tree():
 	globalPosition = global_position.x
@@ -53,6 +43,7 @@ func die():
 	$CollisionShape2D.disabled = true
 	$AudioStreamPlayer2D.play()
 	$DeathTimer.start()
+	$"../../GameManager".increaseScore()
 
 func initialize(start_position, player_position):
 	position.x = start_position.x
@@ -60,3 +51,8 @@ func initialize(start_position, player_position):
 
 func _on_death_timer_timeout():
 	queue_free()
+
+
+func _on_attack_timer_timeout():
+	if canAttack:
+		$"../../PlayerScene".damage()

@@ -1,3 +1,26 @@
-[gd_scene format=3 uid="uid://pjl15e22n3tq"]
+[gd_scene load_steps=3 format=3 uid="uid://pjl15e22n3tq"]
 
-[node name="UiScene" type="Node2D"]
+[ext_resource type="Script" path="res://Scripts/UI_Script.gd" id="1_g2bge"]
+[ext_resource type="FontFile" uid="uid://30gcpdg812ot" path="res://Fonts/TeenyTinyPixls-o2zo.ttf" id="2_5svnk"]
+
+[node name="UiScene" type="Node2D" node_paths=PackedStringArray("scoreText")]
+script = ExtResource("1_g2bge")
+scoreText = NodePath("Score/ScoreText")
+
+[node name="Score" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ScoreText" type="RichTextLabel" parent="Score"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 4.0
+offset_right = 18.0
+offset_bottom = 9.0
+theme_override_fonts/normal_font = ExtResource("2_5svnk")
+theme_override_font_sizes/normal_font_size = 5
+text = "0"
+scroll_active = false
+autowrap_mode = 2
