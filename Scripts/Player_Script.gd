@@ -74,6 +74,8 @@ func damage():
 	handling_input = false
 	$"../EnemySpawner".canSpawn = false
 	print("owie")
+	$UiScene.dead()
+	
 
 func _on_timer_timeout():
 	
