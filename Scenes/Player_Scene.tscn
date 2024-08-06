@@ -71,12 +71,12 @@ wait_time = 0.6
 current = true
 
 [node name="SpawnSound1" type="AudioStreamPlayer2D" parent="Sound"]
-position = Vector2(128, 0)
+position = Vector2(64, 0)
 stream = SubResource("AudioStreamRandomizer_iypmi")
 pitch_scale = 0.8
 
 [node name="SpawnSound2" type="AudioStreamPlayer2D" parent="Sound"]
-position = Vector2(-128, 0)
+position = Vector2(-64, 0)
 stream = SubResource("AudioStreamRandomizer_iypmi")
 
 [node name="ShootSound" type="AudioStreamPlayer2D" parent="Sound"]

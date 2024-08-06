@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://cvat8no6vlkq1"]
+
+[ext_resource type="PackedScene" uid="uid://llmxt4oqses0" path="res://Scenes/GameManager.tscn" id="1_86ymm"]
+[ext_resource type="PackedScene" uid="uid://dxyjy87vildw7" path="res://Scenes/Player_Scene.tscn" id="2_uxqtn"]
+[ext_resource type="PackedScene" uid="uid://pjl15e22n3tq" path="res://Scenes/UI_Scene.tscn" id="3_o05rm"]
+[ext_resource type="PackedScene" uid="uid://vjmbpx7krcrw" path="res://Scenes/PauseScreen.tscn" id="4_obbyu"]
+[ext_resource type="PackedScene" uid="uid://kufxctbsy064" path="res://Scenes/Level_Scene.tscn" id="5_anj0c"]
+[ext_resource type="PackedScene" uid="uid://7do70cge7d3l" path="res://Scenes/EnemySpawner.tscn" id="6_uje6l"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="GameManager" parent="." instance=ExtResource("1_86ymm")]
+
+[node name="PlayerScene" parent="." instance=ExtResource("2_uxqtn")]
+position = Vector2(32, 0)
+
+[node name="UiScene" parent="PlayerScene" instance=ExtResource("3_o05rm")]
+offset_left = -32.0
+offset_right = -32.0
+
+[node name="PauseScreen" parent="PlayerScene" instance=ExtResource("4_obbyu")]
+offset_left = -32.0
+offset_right = -32.0
+
+[node name="LevelScene" parent="." instance=ExtResource("5_anj0c")]
+
+[node name="EnemySpawner" parent="." instance=ExtResource("6_uje6l")]
+position = Vector2(0, 24)
+startWaitTime = 3.1
+minDelay = 2.94
+reducedMinimumDelay = 0.15

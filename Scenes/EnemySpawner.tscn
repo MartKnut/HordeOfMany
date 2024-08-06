@@ -17,7 +17,7 @@ minDelay = 3.35
 reducedMaxDelay = 0.5
 
 [node name="SpawnTimer" type="Timer" parent="."]
-wait_time = 6.0
+wait_time = 3.0
 autostart = true
 
 [node name="SpawnPath" type="Path2D" parent="."]

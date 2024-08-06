@@ -1,11 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://pjl15e22n3tq"]
+[gd_scene load_steps=8 format=3 uid="uid://pjl15e22n3tq"]
 
 [ext_resource type="Script" path="res://Scripts/UI_Script.gd" id="1_g2bge"]
 [ext_resource type="FontFile" uid="uid://30gcpdg812ot" path="res://Fonts/TeenyTinyPixls-o2zo.ttf" id="2_5svnk"]
 
-[node name="UiScene" type="Node2D" node_paths=PackedStringArray("scoreText")]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5tfof"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_us60e"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yhi1n"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4fcex"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n5ibm"]
+
+[node name="UiScene" type="Control" node_paths=PackedStringArray("scoreText", "finalScoreText")]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_g2bge")
 scoreText = NodePath("Score/ScoreText")
+finalScoreText = NodePath("Dead/FinalScoreText")
 
 [node name="Score" type="Control" parent="."]
 layout_mode = 3
@@ -17,25 +30,28 @@ offset_bottom = 40.0
 layout_mode = 0
 offset_left = 3.0
 offset_top = 4.0
-offset_right = 18.0
-offset_bottom = 9.0
+offset_right = 42.0
+offset_bottom = 10.0
 theme_override_fonts/font = ExtResource("2_5svnk")
 theme_override_font_sizes/font_size = 5
 text = "0"
 autowrap_mode = 2
 
 [node name="Dead" type="Control" parent="."]
+process_mode = 3
 visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 64.0
-offset_bottom = 64.0
+offset_bottom = 50.0
 
 [node name="DeadText" type="Label" parent="Dead"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 13.0
+offset_bottom = -15.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.278431, 0, 0, 1)
@@ -48,3 +64,38 @@ theme_override_font_sizes/font_size = 15
 text = "DEAD"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="FinalScoreText" type="Label" parent="Dead"]
+offset_top = 35.0
+offset_right = 64.0
+offset_bottom = 41.0
+theme_override_fonts/font = ExtResource("2_5svnk")
+theme_override_font_sizes/font_size = 5
+text = "Score: 0"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Menu" type="Button" parent="Dead"]
+offset_left = 13.0
+offset_top = 47.0
+offset_right = 49.0
+offset_bottom = 53.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.976471, 0.831373, 1)
+theme_override_colors/font_hover_color = Color(0.999997, 0.999813, 0.641265, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("2_5svnk")
+theme_override_font_sizes/font_size = 5
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5tfof")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_us60e")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_yhi1n")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_4fcex")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_n5ibm")
+text = "MENU"
+
+[node name="Timer" type="Timer" parent="."]
+process_mode = 2
+wait_time = 0.8
+
+[connection signal="button_down" from="Dead/Menu" to="." method="_on_menu_button_down"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

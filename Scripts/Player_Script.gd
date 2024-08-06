@@ -45,6 +45,7 @@ func _inputHandling():
 		canShoot = false
 		_shoot()
 	
+	
 	move_and_slide()
 	
 
@@ -62,6 +63,8 @@ func _shoot():
 	
 	
 	shootTimer.start()
+
+
 
 func playaudio(right:bool):
 	if right:
