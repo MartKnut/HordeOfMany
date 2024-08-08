@@ -33,8 +33,10 @@ func _process(delta):
 
 
 func _on_spawn_timer_timeout():
-	
 	if not canSpawn: return
+	
+	spawnedEnemies = mobs.size() - 2
+	print("Zombies: ", mobs.size() - 2)
 	
 	# Create a new instance of the Mob scene.
 	var _mob = zomb.instantiate()
@@ -62,47 +64,57 @@ func _on_spawn_timer_timeout():
 	elif distanceFromPlayer.x <= 0:
 		player.playaudio(true)
 	
-	# Spawn the mob by adding it to the Main scene.
+	# Spawn the mob by adding it to the Spawner scene.
 	add_child(_mob)
+	move_child(_mob, 0)
 	mobs = get_children()
 	#print(mobs)
 	
-	spawnedEnemies += 1
 	
-	if minDelay <= 0:
-		minDelay = 1
-	elif spawnDelay >= minDelay:
-		spawnDelay = spawnDelay - 0.05 * (expoDiffScaling**(spawnedEnemies / spawnDelay))
-		print("Time reduced by: " , 0.05 * (expoDiffScaling**(spawnedEnemies / spawnDelay)))
-	else:
-		$SpawnTimer.wait_time = minDelay
-		
-		spawnDelay = newWaitTime
-		expoDiffScaling += addedScaling
-		minDelay -= reducedMinimumDelay
-		spawnedEnemies = 0
-		wave = wave + 1
-		if (int(wave)%5) == 00:
-			newWaitTime -= reducedMaxDelay
-			startWaitTime = newWaitTime
-		print("Max Wait Time: ", newWaitTime, " New Spawn Delay: ", spawnDelay, " New Difficulty Multiplier: ", expoDiffScaling, " New Min Delay: ", minDelay, " Wave: ", wave)
-		
+	if spawnedEnemies >= 9:
+		spawnedEnemies = 9
+	spawnDelay -= 0.1 - (0.03 * spawnedEnemies)
 	
-	
-	if spawnDelay > 1:
-		if spawnDelay <= minDelay:
-			$SpawnTimer.wait_time = minDelay
-		elif spawnDelay >= minDelay:
-			$SpawnTimer.wait_time = spawnDelay
-	else:
+	if spawnDelay <= 1:
 		spawnDelay = 1
-		minDelay = 1
-		$SpawnTimer.wait_time = 1
+	
+	$SpawnTimer.wait_time = spawnDelay
+	
+	#if minDelay <= 0:
+		#minDelay = 1
+	#elif spawnDelay >= minDelay:
+		#spawnDelay = spawnDelay - 0.05 * (expoDiffScaling**(spawnedEnemies / spawnDelay))
+		#print("Time reduced by: " , 0.05 * (expoDiffScaling**(spawnedEnemies / spawnDelay)))
+	#else:
+		#$SpawnTimer.wait_time = minDelay
+		#
+		#spawnDelay = newWaitTime
+		#expoDiffScaling += addedScaling
+		#minDelay -= reducedMinimumDelay
+		##spawnedEnemies = 0
+		#wave = wave + 1
+		#if (int(wave)%5) == 00:
+			#newWaitTime -= reducedMaxDelay
+			#startWaitTime = newWaitTime
+		#print("Max Wait Time: ", newWaitTime, " New Spawn Delay: ", spawnDelay, " New Difficulty Multiplier: ", expoDiffScaling, " New Min Delay: ", minDelay, " Wave: ", wave)
+		#
+	#
+	#
+	#if spawnDelay > 1:
+		#if spawnDelay <= minDelay:
+			#$SpawnTimer.wait_time = minDelay
+		#elif spawnDelay >= minDelay:
+			#$SpawnTimer.wait_time = spawnDelay
+	#else:
+		#spawnDelay = 1
+		#minDelay = 1
+		#$SpawnTimer.wait_time = 1
 	
 	
 	
 	print("Spawn Delay: " , spawnDelay)
 	
 
-
+func dead():
+	canSpawn = false
 

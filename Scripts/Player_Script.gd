@@ -27,7 +27,11 @@ func _physics_process(delta):
 	elif position.x <= -64:
 		position.x = 192
 	
-	if not handling_input: return
+	
+	
+	if not handling_input: 
+		position.x +=10 * delta
+		return
 	_inputHandling()
 
 func _inputHandling():
@@ -78,7 +82,7 @@ func damage():
 	$"../EnemySpawner".canSpawn = false
 	print("owie")
 	$UiScene.dead()
-	
+	$"../EnemySpawner".dead()
 
 func _on_timer_timeout():
 	

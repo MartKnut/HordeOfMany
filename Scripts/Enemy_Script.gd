@@ -78,15 +78,15 @@ func die():
 	bigCollision.disabled = true
 	smallCollision.disabled = true
 	$AudioStreamPlayer2D.play()
-	$DeathTimer.start()
+	#$DeathTimer.start()
 	$"../../GameManager".increaseScore()
 
 func initialize(start_position, player_position):
 	position.x = start_position.x
 
 
-func _on_death_timer_timeout():
-	queue_free()
+#func _on_death_timer_timeout():
+	#queue_free()
 
 
 func _on_attack_timer_timeout():
@@ -99,6 +99,12 @@ func _on_attack_timer_timeout():
 
 func _on_animated_sprite_2d_animation_finished():
 	if animatedSprite.animation == "attack" and canAttack:
+		canAttack = false
 		$"../../PlayerScene".damage()
 	if animatedSprite.animation != "attack" and animatedSprite.animation != "approach":
+		canAttack = false
 		animatedSprite.visible = false
+
+
+func _on_audio_stream_player_2d_finished():
+	queue_free()

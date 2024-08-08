@@ -24,7 +24,7 @@ func dead():
 	gameUI.visible = false
 	textflashTimer.start()
 	deathUI.visible = true
-	get_tree().paused = true
+	#get_tree().paused = true
 
 
 
