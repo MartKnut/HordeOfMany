@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://dvsd0rwp4ui48"]
+[gd_scene load_steps=61 format=3 uid="uid://dvsd0rwp4ui48"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy_Script.gd" id="1_bwbtf"]
 [ext_resource type="Texture2D" uid="uid://csgjc25bwbkou" path="res://Sprites/Enemies/Zombie Spritesheet.png" id="2_r7ykp"]
@@ -203,10 +203,6 @@ region = Rect2(448, 128, 64, 64)
 atlas = ExtResource("2_r7ykp")
 region = Rect2(512, 128, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6d40l"]
-atlas = ExtResource("2_r7ykp")
-region = Rect2(576, 128, 64, 64)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_qinvr"]
 animations = [{
 "frames": [{
@@ -394,9 +390,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_310wx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6d40l")
 }],
 "loop": false,
 "name": &"attack",
@@ -404,10 +397,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wnpry"]
-size = Vector2(19, 20)
+size = Vector2(21, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dahdt"]
-size = Vector2(8, 18)
+size = Vector2(9, 18)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vt16x"]
 size = Vector2(35, 53)
@@ -430,15 +423,15 @@ script = ExtResource("1_bwbtf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_qinvr")
-animation = &"approach"
+animation = &"Death0"
 autoplay = "approach"
 
 [node name="BigCollision" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, -8)
+position = Vector2(0.5, -8)
 shape = SubResource("RectangleShape2D_wnpry")
 
 [node name="SmallCollision" type="CollisionShape2D" parent="."]
-position = Vector2(0, -7)
+position = Vector2(0.5, -7)
 shape = SubResource("RectangleShape2D_dahdt")
 
 [node name="AttackCollision" type="CollisionShape2D" parent="."]

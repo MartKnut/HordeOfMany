@@ -25,9 +25,19 @@ func _ready():
 	
 	bigCollision.set_deferred("disabled", true)
 	attackCollision.set_deferred("disabled", true)
+	
+	
+	
 
 func _enter_tree():
 	globalPosition = global_position.x
+	
+	var b = randi_range(0,1)
+	print(b)
+	if b == 1: pass
+	else:
+		apply_scale(Vector2(-1,1))
+	
 	if globalPosition <= 32:
 		teleportable = true
 		right = false
@@ -37,6 +47,7 @@ func _enter_tree():
 	else:
 		teleportable = false
 	#print(globalPosition)
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

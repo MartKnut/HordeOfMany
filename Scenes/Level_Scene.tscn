@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://kufxctbsy064"]
 
-[ext_resource type="Texture2D" uid="uid://mbtq1ea1npw8" path="res://Sprites/Background/256x64.png" id="2_ry0lf"]
+[ext_resource type="Texture2D" uid="uid://cren81or5m5s5" path="res://Sprites/Background/Background 256x64.png" id="1_mqd2j"]
 
 [node name="LevelScene" type="Node2D"]
 z_index = -99
@@ -11,5 +11,5 @@ z_index = -99
 motion_mirroring = Vector2(256, 0)
 
 [node name="256x64" type="Sprite2D" parent="LevelParralax/ParallaxLayer"]
-texture = ExtResource("2_ry0lf")
+texture = ExtResource("1_mqd2j")
 centered = false

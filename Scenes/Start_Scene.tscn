@@ -3,7 +3,7 @@
 [ext_resource type="FontFile" uid="uid://30gcpdg812ot" path="res://Fonts/TeenyTinyPixls-o2zo.ttf" id="1_30u33"]
 [ext_resource type="Script" path="res://Scripts/Main_Menu.gd" id="1_s7whj"]
 [ext_resource type="Texture2D" uid="uid://ckciab7vt6phd" path="res://Sprites/Placeholders/Sky.png" id="3_xkcj5"]
-[ext_resource type="Texture2D" uid="uid://mbtq1ea1npw8" path="res://Sprites/Background/256x64.png" id="4_4n7mx"]
+[ext_resource type="Texture2D" uid="uid://cren81or5m5s5" path="res://Sprites/Background/Background 256x64.png" id="4_iy5tb"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yx8lc"]
 
@@ -72,8 +72,8 @@ texture = ExtResource("3_xkcj5")
 centered = false
 
 [node name="256x64" type="Sprite2D" parent="."]
-position = Vector2(0, 65)
-texture = ExtResource("4_4n7mx")
+position = Vector2(0, 64)
+texture = ExtResource("4_iy5tb")
 centered = false
 
 [connection signal="button_down" from="Main_Menu/Github" to="Main_Menu" method="_on_github_button_down"]
