@@ -423,7 +423,7 @@ script = ExtResource("1_bwbtf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_qinvr")
-animation = &"Death0"
+animation = &"approach"
 autoplay = "approach"
 
 [node name="BigCollision" type="CollisionShape2D" parent="."]

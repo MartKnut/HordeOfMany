@@ -55,6 +55,8 @@ func _on_spawn_timer_timeout():
 		  #mob_spawn_location.position.x , ", the distance from the player is :" , distanceFromPlayer)
 	
 	
+	
+	
 	if distanceFromPlayer.x >= 127:
 		player.playaudio(true)
 	elif distanceFromPlayer.x >= 0:
@@ -117,4 +119,7 @@ func _on_spawn_timer_timeout():
 
 func dead():
 	canSpawn = false
+	var i : int
+	for m in mobs:
+		m.process_mode = Node.PROCESS_MODE_DISABLED
 
