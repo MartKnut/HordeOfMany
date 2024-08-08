@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 # Public variables
-@export var SPEED = 180.0
+@export var SPEED = 128.0
 @export var HEALTH : int = 3
 # Private variables
 var canShoot : bool

@@ -3,12 +3,12 @@ extends Node
 # Public Variables
 @export var zomb : PackedScene
 @export var startWaitTime : float = 2.85
-@export var expoDiffScaling : float = 1.1
-@export var minDelay : float = 2.7
+#@export var expoDiffScaling : float = 1.1
+#@export var minDelay : float = 2.7
 
-@export var addedScaling := 0.15
-@export var reducedMinimumDelay := 0.2
-@export var reducedMaxDelay := 0.1
+#@export var addedScaling := 0.15
+#@export var reducedMinimumDelay := 0.2
+#@export var reducedMaxDelay := 0.1
 
 # Private Variables
 var spawnDelay : float
@@ -16,14 +16,14 @@ var spawnedEnemies : int
 var gameTime : float
 var mobs : Array[Node]
 var wave : int
-var newWaitTime : float
+#var newWaitTime : float
 
 var canSpawn := true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	spawnDelay = startWaitTime
-	newWaitTime = startWaitTime
+	#newWaitTime = startWaitTime
 	mobs = get_children()
 	#print(mobs)
 
@@ -75,7 +75,7 @@ func _on_spawn_timer_timeout():
 	
 	if spawnedEnemies >= 9:
 		spawnedEnemies = 9
-	spawnDelay -= 0.1 - (0.03 * spawnedEnemies)
+	spawnDelay -= 0.15 - (0.03 * spawnedEnemies)
 	
 	if spawnDelay <= 1:
 		spawnDelay = 1

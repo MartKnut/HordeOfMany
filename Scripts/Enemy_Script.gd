@@ -4,6 +4,7 @@ var teleportable : bool = false
 var right : bool
 var player : Node
 var globalPosition
+var atkTimer : Timer
 
 var canAttack = true
 var animationSequence : int
@@ -22,6 +23,7 @@ func _ready():
 	smallCollision = $SmallCollision
 	animatedSprite = $AnimatedSprite2D
 	attackCollision = $AttackCollision
+	atkTimer = $AttackTimer
 	
 	bigCollision.set_deferred("disabled", true)
 	attackCollision.set_deferred("disabled", true)
@@ -112,7 +114,8 @@ func _on_animated_sprite_2d_animation_finished():
 	if animatedSprite.animation == "attack" and canAttack:
 		canAttack = false
 		$"../../PlayerScene".damage()
-		$AttackTimer.start()
+		atkTimer.wait_time = 1.5
+		atkTimer.start()
 		bigCollision.set_deferred("disabled", false)
 		attackCollision.set_deferred("disabled", true)
 		canAttack = true
