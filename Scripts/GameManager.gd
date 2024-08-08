@@ -5,4 +5,3 @@ extends Node
 
 func increaseScore():
 	score += 1
-

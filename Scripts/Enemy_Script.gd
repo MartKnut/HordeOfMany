@@ -112,7 +112,15 @@ func _on_animated_sprite_2d_animation_finished():
 	if animatedSprite.animation == "attack" and canAttack:
 		canAttack = false
 		$"../../PlayerScene".damage()
-	if animatedSprite.animation != "attack" and animatedSprite.animation != "approach":
+		$AttackTimer.start()
+		bigCollision.set_deferred("disabled", false)
+		attackCollision.set_deferred("disabled", true)
+		canAttack = true
+		animatedSprite.play("Stand")
+	
+	if (animatedSprite.animation != "attack" 
+	and animatedSprite.animation != "approach" 
+	and animatedSprite.animation != "Stand"):
 		canAttack = false
 		animatedSprite.visible = false
 

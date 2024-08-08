@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 # Public variables
 @export var SPEED = 180.0
-
+@export var HEALTH : int = 3
 # Private variables
 var canShoot : bool
 var shootTimer
@@ -10,7 +10,7 @@ var animationPlayer : AnimationPlayer
 var handling_input := true
 var soundLeft
 var soundRight
-
+var tween
 
 # Start
 func _enter_tree():
@@ -18,6 +18,8 @@ func _enter_tree():
 	shootTimer = $CanShoot
 	soundLeft = $Sound/SpawnSound2
 	soundRight = $Sound/SpawnSound1
+	
+	
 
 # Physics Update
 func _physics_process(delta):
@@ -78,6 +80,12 @@ func playaudio(right:bool):
 	
 
 func damage():
+	HEALTH -= 1
+	tween = get_tree().create_tween()
+	tween.tween_property($ColorRect, "color", Color8(150,0,0,75), 0.1)
+	tween.tween_property($ColorRect, "color", Color8(150,0,0,0), 0.2)
+	
+	if HEALTH >= 1: return
 	handling_input = false
 	$"../EnemySpawner".canSpawn = false
 	print("owie")

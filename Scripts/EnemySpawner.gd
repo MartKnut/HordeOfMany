@@ -119,7 +119,7 @@ func _on_spawn_timer_timeout():
 
 func dead():
 	canSpawn = false
-	var i : int
 	for m in mobs:
-		m.process_mode = Node.PROCESS_MODE_DISABLED
+		if is_instance_valid(m):
+			m.process_mode = Node.PROCESS_MODE_DISABLED
 
