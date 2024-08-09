@@ -10,6 +10,6 @@ z_index = -99
 [node name="ParallaxLayer" type="ParallaxLayer" parent="LevelParralax"]
 motion_mirroring = Vector2(256, 0)
 
-[node name="256x64" type="Sprite2D" parent="LevelParralax/ParallaxLayer"]
+[node name="256x65" type="Sprite2D" parent="LevelParralax/ParallaxLayer"]
 texture = ExtResource("1_mqd2j")
 centered = false

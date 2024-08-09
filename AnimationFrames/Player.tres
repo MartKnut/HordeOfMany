@@ -1,14 +1,58 @@
-[gd_resource type="SpriteFrames" load_steps=2 format=3 uid="uid://08j6bmq5i233"]
+[gd_resource type="SpriteFrames" load_steps=8 format=3 uid="uid://08j6bmq5i233"]
 
 [ext_resource type="Texture2D" uid="uid://dretf5w7vuvq2" path="res://Sprites/Player/gun.png" id="1_q3wba"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mvknk"]
+atlas = ExtResource("1_q3wba")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wa3sl"]
+atlas = ExtResource("1_q3wba")
+region = Rect2(0, 256, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ij273"]
+atlas = ExtResource("1_q3wba")
+region = Rect2(0, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kvj3u"]
+atlas = ExtResource("1_q3wba")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ni2pn"]
+atlas = ExtResource("1_q3wba")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l6uur"]
+atlas = ExtResource("1_q3wba")
+region = Rect2(0, 0, 64, 64)
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_q3wba")
+"texture": SubResource("AtlasTexture_mvknk")
 }],
 "loop": false,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wa3sl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ij273")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kvj3u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ni2pn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l6uur")
+}],
+"loop": false,
+"name": &"recoil",
+"speed": 48.0
 }]

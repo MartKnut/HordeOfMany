@@ -16,7 +16,8 @@ func _ready():
 	textflashTimer = $Timer
 	gameManager = $"../../GameManager"
 
-func _process(delta):
+func _physics_process(delta):
+	# Yes I will call it every phys. update. Fight me
 	scoreText.text = str(gameManager.score)
 	finalScoreText.text = str("Score: " , gameManager.score)
 

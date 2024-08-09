@@ -71,7 +71,7 @@ func _process(delta):
 	match animationSequence:
 		0:
 			deathAnimation = "Death0"
-		6:
+		8:
 			deathAnimation = "Death1"
 		12:
 			deathAnimation = "Death2"
@@ -103,6 +103,9 @@ func initialize(start_position, player_position):
 
 
 func _on_attack_timer_timeout():
+	# Plays the attack, activates the "attack" hitbox and deactivates all other hitboxes.
+	# The attack hitbox is very big and the last chance for the player to save themselves from
+	# taking damage
 	if canAttack:
 		animatedSprite.play("attack")
 		attackCollision.set_deferred("disabled", false)
@@ -111,22 +114,32 @@ func _on_attack_timer_timeout():
 
 
 func _on_animated_sprite_2d_animation_finished():
+	# If attack animation is finished and enemy was not killed
 	if animatedSprite.animation == "attack" and canAttack:
+		# please do not attack multiple times instantly
 		canAttack = false
-		$"../../PlayerScene".damage()
+		player.damage()
 		atkTimer.wait_time = 1.5
 		atkTimer.start()
+		
+		# reset collisions to something that makes sense
 		bigCollision.set_deferred("disabled", false)
 		attackCollision.set_deferred("disabled", true)
+		
+		# Mona_Lisa.png (not literally) until you're told to attack again
 		canAttack = true
 		animatedSprite.play("Stand")
 	
+	# could probably boil allat to one bool but eh...
 	if (animatedSprite.animation != "attack" 
 	and animatedSprite.animation != "approach" 
 	and animatedSprite.animation != "Stand"):
+		# DIE
 		canAttack = false
 		animatedSprite.visible = false
 
 
 func _on_audio_stream_player_2d_finished():
+	# ROT AWAY (delete from scene)
+	# I'm not good enough to think about garbage collection and all that
 	queue_free()

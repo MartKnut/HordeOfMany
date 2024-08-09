@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://dxyjy87vildw7"]
+[gd_scene load_steps=13 format=3 uid="uid://dxyjy87vildw7"]
 
 [ext_resource type="Script" path="res://Scripts/Player_Script.gd" id="1_8at8w"]
 [ext_resource type="SpriteFrames" uid="uid://cqaet0vqrxdqh" path="res://AnimationFrames/MuzzleFlash.tres" id="2_gscxe"]
+[ext_resource type="PackedScene" uid="uid://bxts2x0a51lci" path="res://Scenes/BulletShells.tscn" id="2_kvwax"]
 [ext_resource type="Texture2D" uid="uid://b54h5prl5upvc" path="res://Sprites/Overlays/screenfilter.png" id="3_gvit8"]
 [ext_resource type="SpriteFrames" uid="uid://08j6bmq5i233" path="res://AnimationFrames/Player.tres" id="3_yph4q"]
 [ext_resource type="AudioStream" uid="uid://dgtlfivpi0aye" path="res://Sounds/ZombSpawn1.wav" id="5_x11fm"]
@@ -29,17 +30,21 @@ stream_3/weight = 0.55
 z_index = 2
 motion_mode = 1
 script = ExtResource("1_8at8w")
+Bullet = ExtResource("2_kvwax")
 
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
-position = Vector2(-10, 26)
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Flash" type="AnimatedSprite2D" parent="Node2D"]
+position = Vector2(-32, 0)
 sprite_frames = ExtResource("2_gscxe")
 animation = &"shoot"
 autoplay = "default"
 centered = false
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Gun" type="AnimatedSprite2D" parent="Node2D"]
 position = Vector2(-32, 0)
 sprite_frames = ExtResource("3_yph4q")
+animation = &"recoil"
 autoplay = "default"
 centered = false
 
@@ -89,5 +94,6 @@ offset_right = 32.0
 offset_bottom = 64.0
 color = Color(0.588235, 0, 0, 0)
 
-[connection signal="animation_finished" from="AnimatedSprite2D2" to="." method="_on_animation_finished"]
+[connection signal="animation_finished" from="Node2D/Flash" to="." method="_on_animation_finished"]
+[connection signal="animation_finished" from="Node2D/Gun" to="." method="_on_gun_animation_finished"]
 [connection signal="timeout" from="CanShoot" to="." method="_on_timer_timeout"]

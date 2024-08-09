@@ -1,6 +1,18 @@
-[gd_resource type="SpriteFrames" load_steps=2 format=3 uid="uid://cqaet0vqrxdqh"]
+[gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://cqaet0vqrxdqh"]
 
 [ext_resource type="Texture2D" uid="uid://dg3l6xayesy8g" path="res://Sprites/Player/muzflash.png" id="1_v07px"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_73p8k"]
+atlas = ExtResource("1_v07px")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yyxrv"]
+atlas = ExtResource("1_v07px")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_svauw"]
+atlas = ExtResource("1_v07px")
+region = Rect2(0, 0, 64, 64)
 
 [resource]
 animations = [{
@@ -14,9 +26,15 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_v07px")
+"texture": SubResource("AtlasTexture_73p8k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yyxrv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_svauw")
 }],
 "loop": false,
 "name": &"shoot",
-"speed": 20.0
+"speed": 30.0
 }]

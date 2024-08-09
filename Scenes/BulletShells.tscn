@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://bxts2x0a51lci"]
+
+[ext_resource type="Texture2D" uid="uid://d12v1j1e2g0sc" path="res://Sprites/Player/bulletshells.png" id="1_mbmi7"]
+[ext_resource type="Script" path="res://Scripts/BulletShells.gd" id="2_0wnxu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qo57v"]
+atlas = ExtResource("1_mbmi7")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p6xff"]
+atlas = ExtResource("1_mbmi7")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i1jxm"]
+atlas = ExtResource("1_mbmi7")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d8v8j"]
+atlas = ExtResource("1_mbmi7")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ypbte"]
+atlas = ExtResource("1_mbmi7")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f7uba"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qo57v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p6xff")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i1jxm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d8v8j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ypbte")
+}],
+"loop": false,
+"name": &"default",
+"speed": 24.0
+}]
+
+[node name="BulletShells" type="AnimatedSprite2D"]
+z_index = 99
+sprite_frames = SubResource("SpriteFrames_f7uba")
+autoplay = "default"
+centered = false
+offset = Vector2(-30, 0)
+script = ExtResource("2_0wnxu")
+
+[connection signal="animation_finished" from="." to="." method="_on_animation_finished"]
