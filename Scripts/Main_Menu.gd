@@ -3,9 +3,7 @@ extends Control
 # cool transition from menu to game
 func _on_play_button_down():
 	var tween = get_tree().create_tween()
-	var tween2 = get_tree().create_tween()
-	tween.tween_property($"../Sky", "position", Vector2(0, -64), 1)
-	tween2.tween_property($"../256x64", "position", Vector2(0, 0), 1)
+	tween.tween_property($"..", "position", Vector2(0, -64), 1)
 	
 	$Timer.start()
 	

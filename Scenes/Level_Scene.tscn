@@ -1,15 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://kufxctbsy064"]
+[gd_scene load_steps=3 format=3 uid="uid://kufxctbsy064"]
 
-[ext_resource type="Texture2D" uid="uid://cren81or5m5s5" path="res://Sprites/Background/Background 256x64.png" id="1_mqd2j"]
+[ext_resource type="Texture2D" uid="uid://b0m6nigncsbms" path="res://Sprites/Background/background bot.png" id="1_j6aa6"]
+[ext_resource type="Texture2D" uid="uid://cug2iu1pm1klp" path="res://Sprites/Background/background top.png" id="2_ixegn"]
 
-[node name="LevelScene" type="Node2D"]
-z_index = -99
+[node name="LevelScene" type="ParallaxBackground"]
 
-[node name="LevelParralax" type="ParallaxBackground" parent="."]
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="LevelParralax"]
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
 motion_mirroring = Vector2(256, 0)
 
-[node name="256x65" type="Sprite2D" parent="LevelParralax/ParallaxLayer"]
-texture = ExtResource("1_mqd2j")
+[node name="BackgroundBot" type="Sprite2D" parent="ParallaxLayer"]
+show_behind_parent = true
+texture = ExtResource("1_j6aa6")
+centered = false
+
+[node name="BackgroundTop" type="Sprite2D" parent="ParallaxLayer"]
+z_index = 99
+texture = ExtResource("2_ixegn")
 centered = false

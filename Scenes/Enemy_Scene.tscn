@@ -1,7 +1,8 @@
-[gd_scene load_steps=66 format=3 uid="uid://dvsd0rwp4ui48"]
+[gd_scene load_steps=71 format=3 uid="uid://dvsd0rwp4ui48"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy_Script.gd" id="1_bwbtf"]
 [ext_resource type="Texture2D" uid="uid://csgjc25bwbkou" path="res://Sprites/Enemies/Zombie Spritesheet.png" id="2_r7ykp"]
+[ext_resource type="Texture2D" uid="uid://bqw07dv0cbiie" path="res://Sprites/Enemies/redeyes.png" id="3_03g41"]
 [ext_resource type="AudioStream" uid="uid://rmu6k8n0ntsk" path="res://Sounds/ZombHurt1.wav" id="3_y6rvv"]
 [ext_resource type="AudioStream" uid="uid://c604onq6drqs8" path="res://Sounds/ZombHurt2.wav" id="4_ie2xf"]
 [ext_resource type="AudioStream" uid="uid://byir7eyfgwpux" path="res://Sounds/ZombHurt3.wav" id="5_4egtj"]
@@ -223,6 +224,22 @@ region = Rect2(448, 128, 64, 64)
 atlas = ExtResource("2_r7ykp")
 region = Rect2(512, 128, 64, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_w1116"]
+atlas = ExtResource("3_03g41")
+region = Rect2(0, 0, 9, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7e48v"]
+atlas = ExtResource("3_03g41")
+region = Rect2(9, 0, 9, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bcb2x"]
+atlas = ExtResource("3_03g41")
+region = Rect2(18, 0, 9, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_73d33"]
+atlas = ExtResource("3_03g41")
+region = Rect2(27, 0, 9, 9)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_qinvr"]
 animations = [{
 "frames": [{
@@ -431,6 +448,29 @@ animations = [{
 "loop": false,
 "name": &"attack",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w1116")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7e48v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bcb2x")
+}, {
+"duration": 24.0,
+"texture": SubResource("AtlasTexture_73d33")
+}, {
+"duration": 6.0,
+"texture": null
+}, {
+"duration": 24.0,
+"texture": SubResource("AtlasTexture_73d33")
+}],
+"loop": false,
+"name": &"eyes",
+"speed": 12.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wnpry"]
@@ -455,25 +495,29 @@ stream_3/stream = ExtResource("6_x2qkb")
 stream_3/weight = 1.0
 
 [node name="EnemyScene" type="Area2D" groups=["enemy"]]
-z_index = 1
 script = ExtResource("1_bwbtf")
+attackTime = 2.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_as_relative = false
 sprite_frames = SubResource("SpriteFrames_qinvr")
-animation = &"Death0"
-autoplay = "approach"
+animation = &"eyes"
+autoplay = "eyes"
 
 [node name="BigCollision" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, -8)
+position = Vector2(-0.5, -8)
 shape = SubResource("RectangleShape2D_wnpry")
+disabled = true
 
 [node name="SmallCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, -7)
 shape = SubResource("RectangleShape2D_dahdt")
+disabled = true
 
 [node name="AttackCollision" type="CollisionShape2D" parent="."]
 position = Vector2(13, 1)
 shape = SubResource("RectangleShape2D_vt16x")
+disabled = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_gi2w5")
@@ -483,8 +527,6 @@ pitch_scale = 0.8
 wait_time = 2.0
 
 [node name="AttackTimer" type="Timer" parent="."]
-wait_time = 5.5
-autostart = true
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]

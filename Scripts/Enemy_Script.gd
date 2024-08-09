@@ -1,5 +1,7 @@
 extends Area2D
 
+@export var attackTime := 1.5
+
 var teleportable : bool = false
 var right : bool
 var player : Node
@@ -15,7 +17,7 @@ var smallCollision : CollisionShape2D
 var attackCollision : CollisionShape2D
 
 var animatedSprite : AnimatedSprite2D
-
+var canvasLayer : CanvasLayer
 # idk how else to do this
 var startYbig : float
 var startYsmall : float
@@ -36,12 +38,15 @@ func _ready():
 	startYattack = attackCollision.position.y
 	
 	bigCollision.set_deferred("disabled", true)
+	smallCollision.set_deferred("disabled", true)
 	attackCollision.set_deferred("disabled", true)
 	
 	
 	
 
 func _enter_tree():
+	
+	
 	globalPosition = global_position.x
 	
 	var b = randi_range(0,1)
@@ -77,7 +82,6 @@ func _process(delta):
 	
 	if animatedSprite.animation == "approach":
 		animationSequence = animatedSprite.frame
-		z_index = animationSequence
 		# Idea is, "older" zombies' hitboxes will be further down, and because of that be hit first by raycast2d 
 		# I tested this by starting the game and checking the positions for the hitboxes in enemies on the 
 		# "remote" scene viewer, works for me.
@@ -85,21 +89,23 @@ func _process(delta):
 		smallCollision.position.y = startYsmall - animationSequence*0.01
 		attackCollision.position.y = startYattack - animationSequence*0.01
 	
-	match animationSequence:
-		0:
-			deathAnimation = "Death0"
-		8:
-			deathAnimation = "Death1"
-		12:
-			deathAnimation = "Death2"
-		14:
-			deathAnimation = "Death3"
-			smallCollision.set_deferred("disabled", true)
-			bigCollision.set_deferred("disabled", false)
-		16:
-			deathAnimation = "Death4"
-		19:
-			deathAnimation = "Death5"
+	if animatedSprite.animation == "approach":
+		match animationSequence:
+			0:
+				smallCollision.set_deferred("disabled", false)
+				deathAnimation = "Death0"
+			8:
+				deathAnimation = "Death1"
+			12:
+				deathAnimation = "Death2"
+			14:
+				deathAnimation = "Death3"
+				smallCollision.set_deferred("disabled", true)
+				bigCollision.set_deferred("disabled", false)
+			16:
+				deathAnimation = "Death4"
+			19:
+				deathAnimation = "Death5"
 	
 
 func die():
@@ -113,6 +119,7 @@ func die():
 
 func initialize(start_position, player_position):
 	position.x = start_position.x
+	position.y = start_position.y - 8
 
 
 #func _on_death_timer_timeout():
@@ -131,32 +138,71 @@ func _on_attack_timer_timeout():
 
 
 func _on_animated_sprite_2d_animation_finished():
-	# If attack animation is finished and enemy was not killed
-	if animatedSprite.animation == "attack" and canAttack:
-		# please do not attack multiple times instantly
-		canAttack = false
-		player.damage()
-		atkTimer.wait_time = 1.5
-		atkTimer.start()
-		
-		# reset collisions to something that makes sense
-		bigCollision.set_deferred("disabled", false)
-		attackCollision.set_deferred("disabled", true)
-		
-		# Mona_Lisa.png (not literally) until you're told to attack again
-		canAttack = true
-		animatedSprite.play("Stand")
+	match animatedSprite.animation:
+		"attack":
+			## please do not attack multiple times instantly
+			canAttack = false
+			player.damage()
+			atkTimer.wait_time = 1.5
+			atkTimer.start()
+			
+			## reset collisions to something that makes sense
+			bigCollision.set_deferred("disabled", false)
+			attackCollision.set_deferred("disabled", true)
+			
+			## Mona_Lisa.png (not literally) until you're told to attack again
+			canAttack = true
+			animatedSprite.play("Stand")
+		"eyes":
+			
+			$".".position = Vector2($".".position.x, 2)
+			var distanceFromPlayer = player.global_position - global_position
+			## Tries to play the spawn sound in the shortest direction between the enemy and the player
+			## I could probably code this in a better way with a match system or something 
+			## ...But i didn't want to figure that out in time... lol
+			if distanceFromPlayer.x >= 127:
+				player.playaudio(true)
+			elif distanceFromPlayer.x >= 0:
+				player.playaudio(false)
+			elif distanceFromPlayer.x <= -128:
+				player.playaudio(false)
+			elif distanceFromPlayer.x <= 0:
+				player.playaudio(true)
+			
+			animatedSprite.play("approach")
+		"stand":
+			pass
+		"approach":
+			atkTimer.wait_time = attackTime
+			atkTimer.start()
 	
-	# could probably boil allat to one bool but eh...
+	## If attack animation is finished and enemy was not killed
+	#if animatedSprite.animation == "attack" and canAttack:
+		## please do not attack multiple times instantly
+		#canAttack = false
+		#player.damage()
+		#atkTimer.wait_time = 1.5
+		#atkTimer.start()
+		#
+		## reset collisions to something that makes sense
+		#bigCollision.set_deferred("disabled", false)
+		#attackCollision.set_deferred("disabled", true)
+		#
+		## Mona_Lisa.png (not literally) until you're told to attack again
+		#canAttack = true
+		#animatedSprite.play("Stand")
+	
+	## could probably boil allat to one bool but eh...
 	if (animatedSprite.animation != "attack" 
 	and animatedSprite.animation != "approach" 
-	and animatedSprite.animation != "Stand"):
-		# DIE
+	and animatedSprite.animation != "Stand"
+	and animatedSprite.animation != "eyes"):
+		## DIE
 		canAttack = false
 		animatedSprite.visible = false
 
 
 func _on_audio_stream_player_2d_finished():
-	# ROT AWAY (delete from scene)
-	# I'm not good enough to think about garbage collection and all that
+	## ROT AWAY (delete from scene)
+	## I'm not good enough to think about garbage collection and all that
 	queue_free()

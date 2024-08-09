@@ -27,4 +27,4 @@ offset_right = -32.0
 
 [node name="EnemySpawner" parent="." instance=ExtResource("6_uje6l")]
 position = Vector2(0, 31)
-startWaitTime = 4.0
+startWaitTime = 2.0

@@ -32,6 +32,13 @@ motion_mode = 1
 script = ExtResource("1_8at8w")
 Bullet = ExtResource("2_kvwax")
 
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(0, 64)
+target_position = Vector2(0, -48)
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="Flash" type="AnimatedSprite2D" parent="Node2D"]
@@ -54,13 +61,6 @@ shape = SubResource("RectangleShape2D_fpyn2")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, 32)
-
-[node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2(0, 64)
-target_position = Vector2(0, -48)
-hit_from_inside = true
-collide_with_areas = true
-collide_with_bodies = false
 
 [node name="Screenfilter" type="Sprite2D" parent="."]
 position = Vector2(-32, 0)
