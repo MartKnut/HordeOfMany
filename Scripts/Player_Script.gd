@@ -38,7 +38,7 @@ func _physics_process(delta):
 	
 	# if you're dead start scrolling the map and skip everything else
 	if not handling_input: 
-		position.x +=10 * delta
+		position.x +=16 * delta
 		return
 	_inputHandling(delta)
 
@@ -83,7 +83,7 @@ func _shoot():
 	$Sound/ShootSound.play()
 	# Check if the raycast hits an item
 	if $RayCast2D.is_colliding():
-			#print($RayCast2D.get_collider().name)
+			print($RayCast2D.get_collider().name)
 			var hit = $RayCast2D.get_collider()
 			# I forgot I made a group for this
 			if hit.is_in_group("enemy"): 

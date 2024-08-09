@@ -27,7 +27,7 @@ stream_3/stream = ExtResource("8_l6c53")
 stream_3/weight = 0.55
 
 [node name="PlayerScene" type="CharacterBody2D"]
-z_index = 2
+z_index = 98
 motion_mode = 1
 script = ExtResource("1_8at8w")
 Bullet = ExtResource("2_kvwax")

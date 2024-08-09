@@ -8,13 +8,18 @@ var atkTimer : Timer
 
 var canAttack = true
 var animationSequence : int
-var deathAnimation = "Death1"
+var deathAnimation = "Death0"
 
 var bigCollision : CollisionShape2D
 var smallCollision : CollisionShape2D
 var attackCollision : CollisionShape2D
 
 var animatedSprite : AnimatedSprite2D
+
+# idk how else to do this
+var startYbig : float
+var startYsmall : float
+var startYattack : float
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -24,6 +29,11 @@ func _ready():
 	animatedSprite = $AnimatedSprite2D
 	attackCollision = $AttackCollision
 	atkTimer = $AttackTimer
+	
+	# idk how else to do this
+	startYbig = bigCollision.position.y
+	startYsmall = smallCollision.position.y
+	startYattack = attackCollision.position.y
 	
 	bigCollision.set_deferred("disabled", true)
 	attackCollision.set_deferred("disabled", true)
@@ -67,6 +77,13 @@ func _process(delta):
 	
 	if animatedSprite.animation == "approach":
 		animationSequence = animatedSprite.frame
+		z_index = animationSequence
+		# Idea is, "older" zombies' hitboxes will be further down, and because of that be hit first by raycast2d 
+		# I tested this by starting the game and checking the positions for the hitboxes in enemies on the 
+		# "remote" scene viewer, works for me.
+		bigCollision.position.y = startYbig - animationSequence*0.01
+		smallCollision.position.y = startYsmall - animationSequence*0.01
+		attackCollision.position.y = startYattack - animationSequence*0.01
 	
 	match animationSequence:
 		0:
@@ -83,7 +100,7 @@ func _process(delta):
 			deathAnimation = "Death4"
 		19:
 			deathAnimation = "Death5"
-			
+	
 
 func die():
 	canAttack = false

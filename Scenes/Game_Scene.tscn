@@ -15,6 +15,7 @@
 position = Vector2(32, 0)
 
 [node name="UiScene" parent="PlayerScene" instance=ExtResource("3_o05rm")]
+z_index = 100
 offset_left = -32.0
 offset_right = -32.0
 
