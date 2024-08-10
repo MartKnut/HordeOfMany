@@ -57,8 +57,8 @@ func _ready():
 func _on_spawn_timer_timeout():
 	if not canSpawn: return
 	
-	spawnedEnemies = mobs.size() - 2
-	print("Zombies: ", mobs.size() - 2)
+	spawnedEnemies = mobs.size() - 5
+	print("Zombies: ", spawnedEnemies)
 	
 	## Create a new instance of the Mob scene.
 	var _mob = zomb.instantiate()
@@ -87,11 +87,11 @@ func _on_spawn_timer_timeout():
 		## I have not yet experienced having more than 5 and surviving, but maybe it's possible idk
 		spawnedEnemies = 9
 	## idk i just put in some numbers after a minimal amount of testing
-	spawnDelay -= 0.15 - (0.025 * spawnedEnemies) 
+	spawnDelay -= 0.2 - (0.03 * spawnedEnemies) 
 	
 	## Minimum delay is hard coded I know 
-	if spawnDelay <= 0.9:
-		spawnDelay = 0.9
+	if spawnDelay <= 0.8:
+		spawnDelay = 0.8
 	
 	$SpawnTimer.wait_time = spawnDelay
 	
