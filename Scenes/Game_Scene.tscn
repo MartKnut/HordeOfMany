@@ -13,6 +13,7 @@
 
 [node name="PlayerScene" parent="." instance=ExtResource("2_uxqtn")]
 position = Vector2(32, 0)
+SPEED = 1.8
 
 [node name="UiScene" parent="PlayerScene" instance=ExtResource("3_o05rm")]
 z_index = 1000

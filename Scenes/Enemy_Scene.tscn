@@ -528,10 +528,8 @@ attackTime = 2.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_qinvr")
-animation = &"Death0"
+animation = &"stand"
 autoplay = "eyes"
-frame = 3
-frame_progress = 1.0
 
 [node name="BigCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8.5)
