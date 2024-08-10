@@ -50,7 +50,7 @@ func _ready():
 	## Spawn the mob by adding it to the Spawner scene.
 	add_child(_mob)
 	## New zombie won't appear "in front" of closer ones
-	move_child(_mob, 0)
+	#move_child(_mob, 0)
 	mobs = get_children()
 
 
@@ -76,7 +76,8 @@ func _on_spawn_timer_timeout():
 	## Spawn the mob by adding it to the Spawner scene.
 	add_child(_mob)
 	## New zombie won't appear "in front" of closer ones
-	move_child(_mob, 0)
+	#move_child(_mob, get_child_count()+1)
+	_mob.set_deferred("z_index", -mobs.size() - 200)
 	mobs = get_children()
 	#print(mobs)
 	

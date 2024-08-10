@@ -23,6 +23,8 @@ var startYbig : float
 var startYsmall : float
 var startYattack : float
 
+var aimedAt : bool
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	player = $"../../PlayerScene"
@@ -65,6 +67,7 @@ func _enter_tree():
 		teleportable = false
 	#print(globalPosition)
 	
+	get_parent().move_child(self, 0)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -85,9 +88,9 @@ func _process(delta):
 		# Idea is, "older" zombies' hitboxes will be further down, and because of that be hit first by raycast2d 
 		# I tested this by starting the game and checking the positions for the hitboxes in enemies on the 
 		# "remote" scene viewer, works for me.
-		bigCollision.position.y = startYbig - animationSequence*0.01
-		smallCollision.position.y = startYsmall - animationSequence*0.01
-		attackCollision.position.y = startYattack - animationSequence*0.01
+		bigCollision.position.y = startYbig + animationSequence*0.01
+		smallCollision.position.y = startYsmall + animationSequence*0.01
+		attackCollision.position.y = startYattack + animationSequence*0.01
 	
 	if animatedSprite.animation == "approach":
 		match animationSequence:
@@ -152,7 +155,7 @@ func _on_animated_sprite_2d_animation_finished():
 			
 			## Mona_Lisa.png (not literally) until you're told to attack again
 			canAttack = true
-			animatedSprite.play("Stand")
+			animatedSprite.play("stand")
 		"eyes":
 			
 			$".".position = Vector2($".".position.x, 2)
@@ -168,12 +171,15 @@ func _on_animated_sprite_2d_animation_finished():
 				player.playaudio(false)
 			elif distanceFromPlayer.x <= 0:
 				player.playaudio(true)
+			## New zombie won't appear "in front" of closer ones
+			## moved from enemyspawner at line 53
+			if animatedSprite.animation_finished:
+				self.set_deferred("z_index", + 200)
 			
 			animatedSprite.play("approach")
-		"stand":
-			pass
 		"approach":
 			atkTimer.wait_time = attackTime
+			animatedSprite.play("stand")
 			atkTimer.start()
 	
 	## If attack animation is finished and enemy was not killed
@@ -192,11 +198,13 @@ func _on_animated_sprite_2d_animation_finished():
 		#canAttack = true
 		#animatedSprite.play("Stand")
 	
-	## could probably boil allat to one bool but eh...
-	if (animatedSprite.animation != "attack" 
+	var hasBeenAttacked = (animatedSprite.animation != "attack" 
 	and animatedSprite.animation != "approach" 
-	and animatedSprite.animation != "Stand"
-	and animatedSprite.animation != "eyes"):
+	and animatedSprite.animation != "stand"
+	and animatedSprite.animation != "eyes")
+	
+	## could probably boil allat to one bool but eh...
+	if (hasBeenAttacked):
 		## DIE
 		canAttack = false
 		animatedSprite.visible = false

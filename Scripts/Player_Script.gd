@@ -1,7 +1,7 @@
-extends CharacterBody2D
+extends Area2D
 
 # Public variables
-@export var SPEED = 128.0
+@export var SPEED = 2.2
 @export var Health : int = 3 # like all good things
 @export var Bullet : PackedScene
 
@@ -13,11 +13,14 @@ var handling_input := true
 var soundLeft
 var soundRight
 var tween
+var ray : RayCast2D
 
 var gunSprite : AnimatedSprite2D
 var muzzleFlash : AnimatedSprite2D
 
 var bobTime : float
+
+var enemiesRaycasted = []
 
 # Start
 func _enter_tree():
@@ -27,6 +30,9 @@ func _enter_tree():
 	soundRight = $Sound/SpawnSound1
 	gunSprite = $Node2D/Gun
 	muzzleFlash = $Node2D/Flash
+	ray = $RayCast2D
+	
+
 
 # Physics Update
 func _physics_process(delta):
@@ -47,7 +53,7 @@ func _inputHandling(delta):
 	# all this is mostly just the default move script that godot gives you
 	var direction = Input.get_axis("Left", "Right")
 	if direction:
-		velocity.x = direction * SPEED
+		position.x += direction * SPEED
 		bobTime += delta
 		# bobs animations
 		# don't worry I'll turn it off for you
@@ -56,19 +62,13 @@ func _inputHandling(delta):
 		$Node2D.position += Vector2(getSineX(),getSineY())
 		
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-	
-	
+		position.x = position.x
 	
 	# if shoot and can shoot, shoot shoot. simple as
 	var shoot = Input.is_action_just_pressed("Shoot")
 	if shoot and canShoot:
 		canShoot = false
 		_shoot()
-	
-	
-	move_and_slide()
-	
 
 
 func _shoot():
@@ -81,17 +81,16 @@ func _shoot():
 	# pew pew
 	# fun fact the shoot sound is just me saying P with a couple edits
 	$Sound/ShootSound.play()
-	# Check if the raycast hits an item
-	if $RayCast2D.is_colliding():
-			print($RayCast2D.get_collider().name)
-			var hit = $RayCast2D.get_collider()
-			# I forgot I made a group for this
-			if hit.is_in_group("enemy"): 
-				hit.die()
+	
+	## Check if the raycast hits an item
+	if ray.is_colliding():
+		print(ray.get_collider().name)
+		var hit = ray.get_collider()
+		if hit.is_in_group("enemy"): 
+			hit.die()
+	
 	
 	muzzleFlash.play("shoot")
-	
-	
 	shootTimer.start()
 
 # redundant comment

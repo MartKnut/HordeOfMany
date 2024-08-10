@@ -15,16 +15,16 @@
 position = Vector2(32, 0)
 
 [node name="UiScene" parent="PlayerScene" instance=ExtResource("3_o05rm")]
-z_index = 100
+z_index = 1000
 offset_left = -32.0
 offset_right = -32.0
 
 [node name="PauseScreen" parent="PlayerScene" instance=ExtResource("4_obbyu")]
+z_index = 1000
 offset_left = -32.0
 offset_right = -32.0
 
 [node name="LevelScene" parent="." instance=ExtResource("5_anj0c")]
 
 [node name="EnemySpawner" parent="." instance=ExtResource("6_uje6l")]
-position = Vector2(0, 31)
-startWaitTime = 2.0
+position = Vector2(0, 32)

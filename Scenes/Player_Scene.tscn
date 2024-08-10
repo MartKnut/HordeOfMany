@@ -12,7 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://cu0ryhy51ex8j" path="res://Sounds/Shot.wav" id="9_8dexq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fpyn2"]
-size = Vector2(19, 22)
+size = Vector2(44, 12)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_iypmi"]
 random_pitch = 1.15
@@ -26,16 +26,14 @@ stream_2/weight = 1.0
 stream_3/stream = ExtResource("8_l6c53")
 stream_3/weight = 0.55
 
-[node name="PlayerScene" type="CharacterBody2D"]
-z_index = 98
-motion_mode = 1
+[node name="PlayerScene" type="Area2D"]
+z_index = 300
 script = ExtResource("1_8at8w")
 Bullet = ExtResource("2_kvwax")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2(0, 64)
 target_position = Vector2(0, -48)
-hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
 
@@ -55,8 +53,8 @@ animation = &"recoil"
 autoplay = "default"
 centered = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 53)
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 58)
 shape = SubResource("RectangleShape2D_fpyn2")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -94,6 +92,8 @@ offset_right = 32.0
 offset_bottom = 64.0
 color = Color(0.588235, 0, 0, 0)
 
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
 [connection signal="animation_finished" from="Node2D/Flash" to="." method="_on_animation_finished"]
 [connection signal="animation_finished" from="Node2D/Gun" to="." method="_on_gun_animation_finished"]
 [connection signal="timeout" from="CanShoot" to="." method="_on_timer_timeout"]
