@@ -1,5 +1,9 @@
 extends Control
 
+
+func _ready():
+	$Play.grab_focus()
+
 # cool transition from menu to game
 func _on_play_button_down():
 	var tween = get_tree().create_tween()
