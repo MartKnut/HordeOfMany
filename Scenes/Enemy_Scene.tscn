@@ -498,7 +498,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"stand",
-"speed": 5.0
+"speed": 12.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wnpry"]
@@ -523,6 +523,7 @@ stream_3/stream = ExtResource("6_x2qkb")
 stream_3/weight = 1.0
 
 [node name="EnemyScene" type="Area2D" groups=["enemy"]]
+z_index = -200
 script = ExtResource("1_bwbtf")
 attackTime = 2.0
 
@@ -530,6 +531,8 @@ attackTime = 2.0
 sprite_frames = SubResource("SpriteFrames_qinvr")
 animation = &"stand"
 autoplay = "eyes"
+frame = 4
+frame_progress = 1.0
 
 [node name="BigCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8.5)
